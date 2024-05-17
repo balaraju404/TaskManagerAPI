@@ -87,6 +87,11 @@ router.post('/users/logoutAll', auth, async (req, res) => {
     }
 })
 
+router.get('/', async (req, res) => {
+    const users = await User.find();
+    res.send(users);
+})
+
 router.get('/users/me', auth, async (req, res) => {
     res.send(req.user);
 })
@@ -162,10 +167,6 @@ router.delete('/users/me/avatar', auth, async (req, res) => {
     req.user.avatar = undefined;
     await req.user.save();
     res.send({ message: "Profile deleted" })
-})
-
-router.get('/', (req, res) => {
-    res.send("Hello World")
 })
 
 export default router;

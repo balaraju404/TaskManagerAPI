@@ -88,7 +88,7 @@ router.post('/users/logoutAll', auth, async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-    const users = await User.find();
+    const users = await User.find().lean();
     res.send(users);
 })
 

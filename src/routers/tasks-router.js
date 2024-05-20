@@ -73,14 +73,6 @@ router.get('/tasks/:id', auth, async (req, res) => {
 })
 
 router.patch('/tasks/:id', auth, async (req, res) => {
-    const updates = Object.keys(req.body);
-    const allowedUpdates = ['description', 'completed', 'deleted'];
-    const isValidOperation = updates.every(update => allowedUpdates.includes(update));
-
-    if (!isValidOperation) {
-        return res.status(400).send({ error: 'Invalid updates!' });
-    }
-
     try {
         const task = await Task.findOne({ _id: req.params.id, owner: req.user._id }).lean();
 
@@ -88,8 +80,19 @@ router.patch('/tasks/:id', auth, async (req, res) => {
             return res.status(404).json({ error: 'Task not found' });
         }
 
+        // Add logging here to check the value of task
+        console.log('Found task:', task);
+
+        const updates = Object.keys(req.body);
+        const allowedUpdates = ['description', 'completed', 'deleted'];
+        const isValidOperation = updates.every(update => allowedUpdates.includes(update));
+
+        if (!isValidOperation) {
+            return res.status(400).send({ error: 'Invalid updates!' });
+        }
+
         updates.forEach(update => task[update] = req.body[update]);
-        await task.save();
+        await Task.updateOne({ _id: req.params.id, owner: req.user._id }, task);
 
         res.status(200).json({ message: 'Task updated successfully', task });
     } catch (error) {
@@ -97,6 +100,7 @@ router.patch('/tasks/:id', auth, async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 router.delete('/tasks/:id', auth, async (req, res) => {
     const id = req.params.id;

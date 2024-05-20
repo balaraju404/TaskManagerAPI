@@ -12,7 +12,7 @@ router.post('/users', async (req, res) => {
     const user = new User(req.body);
     console.log(user);
     try {
-        const exstingUser = await User.findOne({ email: user.email })
+        const exstingUser = await User.findOne({ email: user.email }).lean()
         if (exstingUser) {
             return res.status(400).send('User already exists');
         }
@@ -34,7 +34,7 @@ router.post('/users/otp', async (req, res) => {
             return res.status(400).send('Invalid Email')
         }
 
-        const exstingUser = await User.findOne({ email: email });
+        const exstingUser = await User.findOne({ email: email }).lean();
         if (exstingUser) {
             return res.status(400).send('User already exist');
         }
@@ -119,7 +119,7 @@ router.patch('/users/me', auth, async (req, res) => {
 
 router.delete('/users/me', auth, async (req, res) => {
     try {
-        await User.findOneAndDelete({ _id: req.user._id });
+        await User.findOneAndDelete({ _id: req.user._id }).lean();
         sendCancelationMail(req.user.email, req.user.name)
         res.status(202).json({ message: "User deleted successfully!" });
     } catch (error) {
@@ -152,7 +152,7 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
 router.get('/users/:id/avatar', async (req, res) => {
     const id = req.params.id;
     try {
-        const user = await User.findById(id);
+        const user = await User.findById(id).lean();
         if (!user || !user.avatar) {
             throw new Error();
         }

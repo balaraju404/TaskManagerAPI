@@ -45,7 +45,7 @@ router.get('/tasks', auth, async (req, res) => {
                 skip: skip > 0 ? skip : 0,
                 sort
             }
-        })
+        }).lean()
         if (!userWithTasks.tasks || userWithTasks.tasks.length === 0) {
             return res.status(404).send({ error: "No tasks found" });
         }
@@ -60,7 +60,7 @@ router.get('/tasks', auth, async (req, res) => {
 router.get('/tasks/:id', auth, async (req, res) => {
     const id = req.params.id;
     try {
-        const task = await Task.findOne({ _id: id, owner: req.user._id })
+        const task = await Task.findOne({ _id: id, owner: req.user._id }).lean()
         if (!task) {
             res.status(404).send({ error: 'No record found' })
         }
@@ -82,7 +82,7 @@ router.patch('/tasks/:id', auth, async (req, res) => {
     }
 
     try {
-        const task = await Task.findOne({ _id: req.params.id, owner: req.user._id });
+        const task = await Task.findOne({ _id: req.params.id, owner: req.user._id }).lean();
 
         if (!task) {
             return res.status(404).json({ error: 'Task not found' });
@@ -102,7 +102,7 @@ router.delete('/tasks/:id', auth, async (req, res) => {
     const id = req.params.id;
 
     try {
-        const task = await Task.findOneAndDelete({ _id: id, owner: req.user._id });
+        const task = await Task.findOneAndDelete({ _id: id, owner: req.user._id }).lean();
 
         if (!task) {
             return res.status(404).json({ error: 'Task not found' });

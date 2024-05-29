@@ -1,6 +1,6 @@
 import sgMail from '@sendgrid/mail';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY || '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');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY || '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');
 
 const sendOTPtoMail = (email, otp) => {
     const msg = {

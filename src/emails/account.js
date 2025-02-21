@@ -44,5 +44,3 @@ export {
     sendWelcomeMail,
     sendCancelationMail
 }
-
-Sendgrid api key I'm passing from vercel e

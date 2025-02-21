@@ -1,10 +1,10 @@
-import express from "express";
-import User from "../model/user.js";
-import auth from "../middleware/auth.js";
-import multer from "multer";
-import sharp from 'sharp';
-import { sendOTPtoMail, sendWelcomeMail, sendCancelationMail } from '../emails/account.js'
-import validator from "validator";
+const express = require('express');
+const User = require('../model/user.js');
+const auth = require('../middleware/auth.js');
+const multer = require('multer');
+const sharp = require('sharp');
+const { sendOTPtoMail, sendWelcomeMail, sendCancelationMail } = require('../emails/account.js');
+const validator = require('validator');
 
 const router = new express.Router();
 

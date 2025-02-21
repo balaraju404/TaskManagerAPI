@@ -1,8 +1,8 @@
-import "./src/mongoose.js"
-import express from 'express';
-import cors from 'cors'
-import tasksRouter from "./src/routers/tasks-router.js";
-import usersRouter from "./src/routers/users-routing.js";
+require('./src/mongoose.js');
+const express = require('express');
+const cors = require('cors');
+const tasksRouter = require('./src/routers/tasks-router.js');
+const usersRouter = require('./src/routers/users-routing.js');
 
 const app = express()
 const port = process.env.PORT || 3000

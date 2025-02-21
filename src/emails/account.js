@@ -31,7 +31,7 @@ const sendCancelationMail = (email, name) => {
     })
 }
 
-export {
+module.exports = {
     sendOTPtoMail,
     sendWelcomeMail,
     sendCancelationMail

@@ -1,7 +1,7 @@
-import express from "express";
-import Task from '../model/task.js';
-import auth from "../middleware/auth.js";
-import User from "../model/user.js";
+const express = require('express');
+const Task = require('../model/task.js');
+const auth = require('../middleware/auth.js');
+const User = require('../model/user.js');
 
 const router = new express.Router();
 

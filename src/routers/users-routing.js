@@ -169,4 +169,4 @@ router.delete('/users/me/avatar', auth, async (req, res) => {
     res.send({ message: "Profile deleted" })
 })
 
-export default router;
+module.exports = router;

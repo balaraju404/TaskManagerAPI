@@ -7,7 +7,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const sendOTPtoMail = async (email, otp) => {
     try {
-        console log(process.env.SENDGRID_API_KEY)
+        console.log(process.env.SENDGRID_API_KEY)
         const msg = {
             to: email,
             from: 'gandhambalaraju18@gmail.com',

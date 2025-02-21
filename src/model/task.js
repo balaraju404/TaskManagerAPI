@@ -27,4 +27,4 @@ const taksSchema = new mongoose.Schema({
 
 const Task = mongoose.model('Task', taksSchema)
 
-export default Task;
+module.exports = Task;

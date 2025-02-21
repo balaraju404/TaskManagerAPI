@@ -119,4 +119,4 @@ router.delete('/tasks/:id', auth, async (req, res) => {
     }
 });
 
-export default router;
+module.exports = router;

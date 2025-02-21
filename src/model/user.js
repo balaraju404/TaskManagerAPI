@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
-import validator from 'validator';
-import bcryptjs from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import Task from "./task.js";
+const mongoose = require('mongoose');
+const validator = require('validator');
+const bcryptjs = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const Task = require('./task.js');
 
 const userSchema = new mongoose.Schema({
     name: {
